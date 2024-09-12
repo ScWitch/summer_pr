@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Configurator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Главный экран с фоновым изображением */
+        .hero {
+            background-image: url('KEKV.jpeg'); /* Здесь укажи актуальный путь к изображению */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255, 247, 247, 0.3);
+        }
+
+        .hero button {
+            background-color: #3467b4;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #4cae4c;
+            transform: translateY(-3px);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Контейнер с формой конфигуратора */
+        .container {
+        width: 400px;
+        margin: 100px auto;
+        background-color: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        }
+
+        h1 {
+        color: #000000;
+        font-size: 24px;
+        margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        
+        input[type="text"] {
+        width: 100%; /* Изменяем ширину на 100%, чтобы она соответствовала контейнеру */
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        }
+
+        span.price {
+            display: inline-block;
+            width: 50px;
+            text-align: right;
+            margin-left: 10px;
+            color: #333;
+        }
+
+        button.submit-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: #6a67f2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+
+        button.submit-btn:hover {
+        background-color: #5754d7;
+        }   
+
+        .search-results {
+        width: 100%; /* Ширина списка должна быть 100% для совпадения с input */
+        max-height: 150px;
+        overflow-y: auto;
+        list-style-type: none;
+        background-color: white;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        }
+
+        .search-results li {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .search-results li:hover {
+            background-color: #f1f1f1;
+        }
+
+        .search-results li:last-child {
+            border-bottom: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Главный экран с фоновым изображением -->
+    <div class="hero">
+        <div class="content">
+            <p style="font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);">Расчет стоимости комплектующих для ПК</p>
+            <p>Веб-сервис для точного расчета стоимости видеокарт, процессоров и других комплектующих</p>
+            <button onclick="scrollToConfigurator()">Рассчитать стоимость</button>
+        </div>
+        <div class="scroll-down">&#8595;</div> <!-- Иконка стрелки вниз -->
+    </div>
+
+    <section style="padding: 50px; background-color: #ffffff;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+          <h2>Добро пожаловать на SellPC — уникальный веб-сервис для расчета стоимости б/у компьютерных комплектующих для продажи на Avito!</h2>
+          <p style="font-size: 18px; color: #555; line-height: 1.6;">
+            В мире, где технологии развиваются с невероятной скоростью, правильный выбор и продажа б/у комплектующих для ПК может стать сложной задачей. 
+            SellPC был создан специально для того, чтобы помочь вам в этом процессе! Наш сервис позволяет легко и быстро рассчитать стоимость таких ключевых компонентов, как видеокарта, процессор, материнская плата, кулер, корпус, блок питания, оперативная память и SSD.
+          </p>
+          <p style="font-size: 18px; color: #555; line-height: 1.6;">
+            Просто введите необходимые характеристики в соответствующие поля, и наш алгоритм мгновенно произведет расчет актуальной стоимости для дальнейшей продажи на Avito.
+            Мы стремимся предложить самую точную и актуальную информацию, чтобы вы могли эффективно продать ваши комплектующие и заработать больше.
+          </p>
+          <p style="font-size: 18px; color: #555; line-height: 1.6;">
+            SellPC — ваш надежный помощник в мире технологий и продажи компьютерных компонентов. Доверьтесь нам, и вы сэкономите время и силы на оценке и продаже ваших комплектующих!
+          </p>
+        </div>
+      </section>
+
+    <!-- Контейнер с формой конфигуратора -->
+    <div id="configurator" class="container">
+        <h1>Конфигуратор ПК</h1>
+        <form id="pc-configurator">
+            <label for="video_card">Видеокарта:</label>
+            <input type="text" id="video_card_input" oninput="searchComponent('video_card')" placeholder="Введите видеокарту">
+            <span id="video_card_price" class="price"></span>
+            <ul id="video_card_results" class="search-results hidden"></ul>
+    
+            <label for="cpu">Процессор (CPU):</label>
+            <input type="text" id="cpu_input" oninput="searchComponent('cpu')" placeholder="Введите процессор">
+            <span id="cpu_price" class="price"></span>
+            <ul id="cpu_results" class="search-results hidden"></ul>
+    
+            <label for="cooler">Кулер:</label>
+            <input type="text" id="cooler_input" oninput="searchComponent('cooler')" placeholder="Введите кулер">
+            <span id="cooler_price" class="price"></span>
+            <ul id="cooler_results" class="search-results hidden"></ul>
+    
+            <label for="ssd">Накопитель (SSD):</label>
+            <input type="text" id="ssd_input" oninput="searchComponent('ssd')" placeholder="Введите SSD">
+            <span id="ssd_price" class="price"></span>
+            <ul id="ssd_results" class="search-results hidden"></ul>
+    
+            <label for="ram">Оперативная память (RAM):</label>
+            <input type="text" id="ram_input" oninput="searchComponent('ram')" placeholder="Введите оперативную память">
+            <span id="ram_price" class="price"></span>
+            <ul id="ram_results" class="search-results hidden"></ul>
+    
+            <label for="power_unit">Блок питания:</label>
+            <input type="text" id="power_unit_input" oninput="searchComponent('power_unit')" placeholder="Введите блок питания">
+            <span id="power_unit_price" class="price"></span>
+            <ul id="power_unit_results" class="search-results hidden"></ul>
+    
+            <label for="frame">Корпус:</label>
+            <input type="text" id="frame_input" oninput="searchComponent('frame')" placeholder="Введите корпус">
+            <span id="frame_price" class="price"></span>
+            <ul id="frame_results" class="search-results hidden"></ul>
+    
+            <label for="motherboard">Материнская плата:</label>
+            <input type="text" id="motherboard_input" oninput="searchComponent('motherboard')" placeholder="Введите материнскую плату">
+            <span id="motherboard_price" class="price"></span>
+            <ul id="motherboard_results" class="search-results hidden"></ul>
+        </form>
+        
+        <h2>Общая стоимость: <span id="total-price">0</span>₽</h2>
+    </div>
+   
+
+    <script>
+        function scrollToConfigurator() {
+            document.getElementById('configurator').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const components = ['video_card', 'cpu', 'cooler', 'ssd', 'ram', 'power_unit', 'frame', 'motherboard'];
+        let totalPrice = 0;
+
+        function searchComponent(component) {
+            const query = document.getElementById(`${component}_input`).value;
+            const resultsList = document.getElementById(`${component}_results`);
+
+            if (query === '') {
+                resultsList.innerHTML = '';
+                resultsList.classList.add('hidden');
+                return;
+            }
+
+            // Отправляем запрос на сервер
+            fetch(`/api/${component}?search=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsList.innerHTML = '';
+
+                    if (data.length === 0) {
+                        resultsList.classList.add('hidden');
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = `${item.name} (${item.price}₽)`;
+                        li.addEventListener('click', () => {
+                            selectComponent(component, item.name, item.price);
+                            resultsList.classList.add('hidden'); // Скрыть список после выбора
+                        });
+                        resultsList.appendChild(li);
+                    });
+
+                    resultsList.classList.remove('hidden');
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function selectComponent(component, name, price) {
+            document.getElementById(`${component}_input`).value = name;
+            document.getElementById(`${component}_price`).textContent = `${price}₽`;
+
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            totalPrice = 0;
+
+            components.forEach(component => {
+                const priceText = document.getElementById(`${component}_price`).textContent;
+                const price = parseFloat(priceText.replace('₽', ''));
+
+                if (!isNaN(price)) {
+                    totalPrice += price;
+                }
+            });
+
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+    </script>
+</body>
+</html>
